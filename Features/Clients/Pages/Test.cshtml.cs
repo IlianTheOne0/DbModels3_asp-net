@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApplication1.Pages
+namespace WebApplication1.Features.Clients.Pages
 {
-    public class IndexModel : PageModel
+    public class TestModel : PageModel
     {
         public void OnGet()
         {
