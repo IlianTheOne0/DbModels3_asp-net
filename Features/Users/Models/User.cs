@@ -8,15 +8,15 @@ public class User
     public Guid Id { get; set; }
 
     [Required]
-    [MaxLength(50)]
+    [Column(TypeName = "varchar(50)")]
     public string Login { get; set; } = null!;
 
     [Required]
-    [MaxLength(255)]
+    [Column(TypeName = "varchar(255)")]
     public string Password { get; set; } = null!;
 
     [Required]
-    [MaxLength(100)]
+    [Column(TypeName = "varchar(100)")]
     [EmailAddress]
     public string Email { get; set; } = null!;
 

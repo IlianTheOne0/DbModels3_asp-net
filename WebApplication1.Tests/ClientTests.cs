@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Tests;
+﻿namespace WebApplication1Tests;
 
 using Microsoft.EntityFrameworkCore;
 using System;

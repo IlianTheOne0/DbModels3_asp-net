@@ -1,0 +1,52 @@
+﻿@page
+@model WebApplication1.Features.Clients.Pages.DetailsModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details Page</h1>
+
+<div>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Add New Client</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="Client_FirstName" class="form-label">First Name</label>
+                    <input asp-for="Client.FirstName" class="form-control" />
+                    <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Client_Surname" class="form-label">Surname</label>
+                    <input asp-for="Client.Surname" class="form-control" />
+                    <span asp-validation-for="Client.Surname" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Client_Patronymic" class="form-label">Patronymic</label>
+                    <input asp-for="Client.Patronymic" class="form-control" />
+                    <span asp-validation-for="Client.Patronymic" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Client_Email" class="form-label">Email</label>
+                    <input asp-for="Client.Email" type="email" class="form-control" />
+                    <span asp-validation-for="Client.Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Client_BirthDate" class="form-label">Birth Date</label>
+                    <input asp-for="Client.BirthDate" type="date" class="form-control" />
+                    <span asp-validation-for="Client.BirthDate" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Client</button>
+            </form>
+        </div>
+    </div>
+</div>

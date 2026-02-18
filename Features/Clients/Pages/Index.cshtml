@@ -78,6 +78,9 @@
                                         <td>@client.Patronymic</td>
                                         <td>@client.Email</td>
                                         <td>@client.BirthDate.ToShortDateString()</td>
+                                        <td>
+                                            <a asp-page="/Features/Clients/Pages/Details" asp-route-id="@client.Id" class="btn btn-s btn-info">Details</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
