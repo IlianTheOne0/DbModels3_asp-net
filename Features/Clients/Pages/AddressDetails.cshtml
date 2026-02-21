@@ -1,0 +1,97 @@
+﻿@page "{id:guid}"
+@model WebApplication1.Features.Clients.Pages.AddressDetailsModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Address Details";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Address Details</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AddressInfo.Country" class="form-label">Country *</label>
+                                <input asp-for="AddressInfo.Country" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Country" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AddressInfo.Region" class="form-label">Region *</label>
+                                <input asp-for="AddressInfo.Region" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Region" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AddressInfo.City" class="form-label">City *</label>
+                                <input asp-for="AddressInfo.City" class="form-control" />
+                                <span asp-validation-for="AddressInfo.City" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AddressInfo.Area" class="form-label">Area</label>
+                                <input asp-for="AddressInfo.Area" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Area" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AddressInfo.Street" class="form-label">Street *</label>
+                            <input asp-for="AddressInfo.Street" class="form-control" />
+                            <span asp-validation-for="AddressInfo.Street" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AddressInfo.Building" class="form-label">Building *</label>
+                                <input asp-for="AddressInfo.Building" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Building" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AddressInfo.Entrance" class="form-label">Entrance</label>
+                                <input asp-for="AddressInfo.Entrance" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Entrance" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AddressInfo.Apartment" class="form-label">Apartment</label>
+                                <input asp-for="AddressInfo.Apartment" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Apartment" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-3 mb-3">
+                                <label asp-for="AddressInfo.Room" class="form-label">Room</label>
+                                <input asp-for="AddressInfo.Room" class="form-control" />
+                                <span asp-validation-for="AddressInfo.Room" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Address</button>
+
+                        @if (Model.HasAddress)
+                        {
+                            <button type="submit" asp-page-handler="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this address?');">Delete Address</button>
+                        }
+
+                        <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <partial name="/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+}

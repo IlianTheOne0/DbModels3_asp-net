@@ -19,23 +19,16 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         Clients = _dbContext.Clients.OrderByDescending(client => client.CreatedAt).ToList();
-
-        Console.WriteLine($"Clients count: {Clients.Count}");
     }
 
     public IActionResult OnPost()
     {
-        Console.WriteLine($"Received client data: {Client.FirstName} {Client.Surname}, Email: {Client.Email}, BirthDate: {Client.BirthDate}");
-
         if (!ModelState.IsValid)
         {
             Clients = _dbContext.Clients.OrderByDescending(client => client.CreatedAt).ToList();
-            Console.WriteLine("Model state is invalid. Returning to page with validation errors.");
             return Page();
         }
 
-        Console.WriteLine("Model state is valid. Proceeding to create new client.");
-        
         var newClient = new Client
         {
             Id = Guid.NewGuid(),
@@ -50,8 +43,6 @@ public class IndexModel : PageModel
 
         _dbContext.Clients.Add(newClient);
         _dbContext.SaveChanges();
-
-        Console.WriteLine($"New client created with ID: {newClient.Id}");
 
         return RedirectToPage("./Index");
     }

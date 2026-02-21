@@ -20,6 +20,7 @@ builder.Services.AddRazorPages
                     {
                         template = template.Replace("Features/", "", StringComparison.OrdinalIgnoreCase);
                         template = template.Replace("/Pages", "", StringComparison.OrdinalIgnoreCase);
+                        template = template.Replace("Pages", "", StringComparison.OrdinalIgnoreCase);
 
                         if (template.StartsWith("Pages/", StringComparison.OrdinalIgnoreCase))
                         {

@@ -1,52 +1,132 @@
-﻿@page
+﻿@page "{id:guid}"
+@using WebApplication1.Features.Clients.Models
 @model WebApplication1.Features.Clients.Pages.DetailsModel
 @{
     Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Client Details";
 }
 
-<h1>Details Page</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Edit Client</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        @Html.AntiForgeryToken()
 
-<div>
-    <div class="card">
-        <div class="card-header">
-            <h2 class="card-title mb-0">Add New Client</h2>
+                        <div class="mb-3">
+                            <label for="Client_FirstName" class="form-label">First Name</label>
+                            <input asp-for="Client.FirstName" class="form-control" />
+                            <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Client_Surname" class="form-label">Surname</label>
+                            <input asp-for="Client.Surname" class="form-control" />
+                            <span asp-validation-for="Client.Surname" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Client_Patronymic" class="form-label">Patronymic</label>
+                            <input asp-for="Client.Patronymic" class="form-control" />
+                            <span asp-validation-for="Client.Patronymic" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Client_Email" class="form-label">Email</label>
+                            <input asp-for="Client.Email" type="email" class="form-control" />
+                            <span asp-validation-for="Client.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Client_BirthDate" class="form-label">Birth Date</label>
+                            <input asp-for="Client.BirthDate" type="date" class="form-control" />
+                            <span asp-validation-for="Client.BirthDate" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update Client</button>
+                        <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <form method="post">
-                @Html.AntiForgeryToken()
 
-                <div class="mb-3">
-                    <label for="Client_FirstName" class="form-label">First Name</label>
-                    <input asp-for="Client.FirstName" class="form-control" />
-                    <span asp-validation-for="Client.FirstName" class="text-danger"></span>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Client Details</h2>
                 </div>
-
-                <div class="mb-3">
-                    <label for="Client_Surname" class="form-label">Surname</label>
-                    <input asp-for="Client.Surname" class="form-control" />
-                    <span asp-validation-for="Client.Surname" class="text-danger"></span>
+                <div class="card-body">
+                    <form method="post">
+                        <button asp-page-handler="ShowPhonesForm" asp-route-id="@Model.ClientId" class="btn btn-info">Add Phone</button>
+                    </form>
                 </div>
+            </div>
 
-                <div class="mb-3">
-                    <label for="Client_Patronymic" class="form-label">Patronymic</label>
-                    <input asp-for="Client.Patronymic" class="form-control" />
-                    <span asp-validation-for="Client.Patronymic" class="text-danger"></span>
+            @if (Model.ShowPhonesForm)
+            {
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="card-title mb-0">Add New Phone</h2>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-page-handler="AddPhone" asp-route-id="@Model.ClientId">
+                            @Html.AntiForgeryToken()
+                            <div class="mb-3">
+                                <label for="Phone_Number" class="form-label">Phone Number</label>
+                                <input asp-for="Phone.Number" class="form-control" />
+                                <span asp-validation-for="Phone.Number" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Phone_CountryCode" class="form-label">Country Code</label>
+                                <select asp-for="Phone.CountryCode" asp-items="Html.GetEnumSelectList<CountryCode>()" class="form-control"></select>
+                                <span asp-validation-for="Phone.CountryCode" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Phone</button>
+                            <a asp-page="./Details" asp-route-id="@Model.ClientId" class="btn btn-secondary">Cancel</a>
+                        </form>
+                    </div>
                 </div>
+            }
+        </div>
+    </div>
 
-                <div class="mb-3">
-                    <label for="Client_Email" class="form-label">Email</label>
-                    <input asp-for="Client.Email" type="email" class="form-control" />
-                    <span asp-validation-for="Client.Email" class="text-danger"></span>
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title mb-0">Phone Numbers</h2>
                 </div>
-
-                <div class="mb-3">
-                    <label for="Client_BirthDate" class="form-label">Birth Date</label>
-                    <input asp-for="Client.BirthDate" type="date" class="form-control" />
-                    <span asp-validation-for="Client.BirthDate" class="text-danger"></span>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Phone Number</th>
+                                    <th>Country Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var phone in Model.Phones)
+                                {
+                                    <tr>
+                                        <td>@phone.Number</td>
+                                        <td>@phone.CountryCode</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Add Client</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <partial name="/Pages/Shared/_ValidationScriptsPartial.cshtml" />
+}

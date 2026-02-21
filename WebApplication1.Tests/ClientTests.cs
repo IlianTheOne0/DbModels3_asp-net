@@ -149,11 +149,13 @@ public class ClientTests
         var phone1 = new Phone
         {
             Number = "123456789",
+            CountryCode = "+1",
             Client = client
         };
         var phone2 = new Phone
         {
             Number = "987654321",
+            CountryCode = "+380",
             Client = client
         };
 

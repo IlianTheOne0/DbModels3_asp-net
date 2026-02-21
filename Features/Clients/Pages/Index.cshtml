@@ -67,6 +67,7 @@
                                     <th>Patronymic</th>
                                     <th>Email</th>
                                     <th>Birth Date</th>
+                                    <th>Additional info</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,7 +80,10 @@
                                         <td>@client.Email</td>
                                         <td>@client.BirthDate.ToShortDateString()</td>
                                         <td>
-                                            <a asp-page="/Features/Clients/Pages/Details" asp-route-id="@client.Id" class="btn btn-s btn-info">Details</a>
+                                            <div class="d-grid gap-2">
+                                                <a asp-page="/Features/Clients/Pages/Details" asp-route-id="@client.Id" class="btn btn-sm btn-info">Details</a>
+                                                <a asp-page="/Features/Clients/Pages/AddressDetails" asp-route-id="@client.Id" class="btn btn-sm btn-warning">Address</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
